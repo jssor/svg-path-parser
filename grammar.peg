@@ -1,11 +1,23 @@
 {
+  var COMMAND_MOVETO = 1;
+  var COMMAND_LINETO = 2;
+  var COMMAND_HORIZONTAL_LINETO = 3;
+  var COMMAND_VERTICAL_LINETO = 4;
+  var COMMAND_CURVETO = 5;
+  var COMMAND_SMOOTH_CURVETO = 6;
+  var COMMAND_QUADRATIC_CURVETO = 7;
+  var COMMAND_SMOOTH_QUADRATIC_CURVETO = 8;
+  var COMMAND_ELLIPTICAL_ARC = 9;
+  var COMMAND_CLOSEPATH = 10;
+  
   function merge(first,more){
     if (!more) return [first];
     for (var a=[first],i=0,l=more.length;i<l;i++) a[i+1]=more[i][1];
     return a;
   }
 
-  var cmds = {m:'moveto',l:'lineto',h:'horizontal lineto',v:'vertical lineto',c:'curveto',s:'smooth curveto',q:'quadratic curveto',t:'smooth quadratic curveto',a:'elliptical arc',z:'closepath'};
+  //var cmds = {m:'moveto',l:'lineto',h:'horizontal lineto',v:'vertical lineto',c:'curveto',s:'smooth curveto',q:'quadratic curveto',t:'smooth quadratic curveto',a:'elliptical arc',z:'closepath'};
+  var cmds = {m:COMMAND_MOVETO,l:COMMAND_LINETO,h:COMMAND_HORIZONTAL_LINETO,v:COMMAND_VERTICAL_LINETO,c:COMMAND_CURVETO,s:COMMAND_SMOOTH_CURVETO,q:COMMAND_QUADRATIC_CURVETO,t:COMMAND_SMOOTH_QUADRATIC_CURVETO,a:COMMAND_ELLIPTICAL_ARC,z:COMMAND_CLOSEPATH};
   for (var code in cmds) cmds[code.toUpperCase()]=cmds[code];
   function commands(code,args){
     if (!args) args=[{}];
