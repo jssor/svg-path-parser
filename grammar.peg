@@ -10,6 +10,14 @@
   var COMMAND_ELLIPTICAL_ARC = 9;
   var COMMAND_CLOSEPATH = 10;
   
+  /*
+  M 10,30
+  A 20,20 0,0,1 50,30
+  A 20,20 0,0,1 90,30
+  Q 90,60 50,90
+  Q 10,60 10,30 z
+  */
+  
   function merge(first,more){
     if (!more) return [first];
     for (var a=[first],i=0,l=more.length;i<l;i++) a[i+1]=more[i][1];
