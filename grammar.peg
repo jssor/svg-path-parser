@@ -1,4 +1,5 @@
 {
+  var COMMAND_CLOSEPATH = 0;
   var COMMAND_MOVETO = 1;
   var COMMAND_LINETO = 2;
   var COMMAND_HORIZONTAL_LINETO = 3;
@@ -8,7 +9,6 @@
   var COMMAND_QUADRATIC_CURVETO = 7;
   var COMMAND_SMOOTH_QUADRATIC_CURVETO = 8;
   var COMMAND_ELLIPTICAL_ARC = 9;
-  var COMMAND_CLOSEPATH = 10;
   
   /*
   M 10,30
@@ -30,8 +30,8 @@
   function commands(code,args){
     if (!args) args=[{}];
     for (var i=args.length;i--;){
-      var cmd={code:code,command:cmds[code]};
-      if (code==code.toLowerCase()) cmd.relative=true;
+      var cmd={c:code,m:cmds[code]};
+      if (code==code.toLowerCase()) cmd.re=true;
       for (var k in args[i]) cmd[k]=args[i][k];
       args[i] = cmd;
     }
@@ -45,9 +45,9 @@ svg_path
     if (!data) return [];
     for (var cmds=[],i=0;i<data.length;i++) cmds=cmds.concat.apply(cmds,data[i]);
     var first=cmds[0];
-    if (first && first.code=='m'){ // Per spec, first moveto is never relative
-      delete first.relative;
-      first.code = 'M';
+    if (first && first.c=='m'){ // Per spec, first moveto is never relative
+      delete first.re;
+      first.c = 'M';
     }
     return cmds;
   }
